@@ -25,7 +25,7 @@ try:
         st.error("GEMINI_API_KEY is empty in Streamlit Secrets.")
         st.stop()
 
-client = genai.Client(api_key=api_key)
+    client = genai.Client(api_key=api_key)
 
 except Exception as e:
     st.error(
