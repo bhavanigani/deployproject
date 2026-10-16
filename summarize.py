@@ -103,7 +103,23 @@ DOCUMENT:
             with st.spinner("Gemini is summarizing your document..."):
                 try:
                     response = client.models.generate_content(
-                        model="gemini-2.5-flash",
                         model="gemini-3.5-flash",
                         contents=prompt
                     )
+
+                    if response.text:
+                        st.subheader("📝 Gemini Summary")
+                        st.markdown(response.text)
+                    else:
+                        st.warning(
+                            "Gemini returned an empty response. "
+                            "Try another document."
+                        )
+
+                except Exception as e:
+                    st.error("Gemini could not summarize the document.")
+                    st.code(str(e))
+
+    except Exception as e:
+        st.error("Could not read the uploaded document.")
+        st.code(str(e))
